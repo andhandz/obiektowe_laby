@@ -6,6 +6,7 @@ import java.util.ArrayList;
 abstract class AbstractWorldMap implements IWorldMap {
     ArrayList<Animal> animals= new ArrayList<>();
     MapVisualiser map= new MapVisualiser(this);
+
     public boolean canMoveTo(Vector2d position) {
         return (!isOccupied(position));
     }
@@ -18,12 +19,7 @@ abstract class AbstractWorldMap implements IWorldMap {
     }
 
     public boolean isOccupied(Vector2d position) {
-        for (Animal animal : animals) {
-            if (animal.getPosition().equals(position)) {
-                return true;
-            }
-        }
-        return false;
+        return objectAt(position) != null;
     }
 
     public Object objectAt(Vector2d position) {
@@ -38,10 +34,11 @@ abstract class AbstractWorldMap implements IWorldMap {
     public ArrayList<Animal> getAnimals() {
         return this.animals;
     }
-    public abstract Vector2d getMini();
-    public abstract Vector2d getMaxi();
+
+    public abstract Vector2d getLowerLeft();
+    public abstract Vector2d getUpperRight();
 
     public String toString(){
-    return map.draw(getMini(),getMaxi());
+    return map.draw(getLowerLeft(), getUpperRight());
     }
 }
