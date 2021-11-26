@@ -3,11 +3,11 @@ package agh.ics.oop;
 public class World {
     public static void main(String[] args) {
         MoveDirection[] directions = new OptionsParser().parse(args);
-        GrassField testGrass= new GrassField(10);
-        testGrass.place(new Animal(testGrass,new Vector2d(2,2)));
-        testGrass.place(new Animal(testGrass,new Vector2d(3,4)));
-        testGrass.run(directions);
-        System.out.println(testGrass);
+        IWorldMap map= new GrassField(10);
+        Vector2d[] positions = { new Vector2d(12,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions,map,positions);
+        engine.run();
+        System.out.println(map);
     }
 
 }

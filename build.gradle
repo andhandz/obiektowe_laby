@@ -21,4 +21,6 @@ test {
 application {
     mainClassName = 'agh.ics.oop.World'
 }
-
+run{
+    args "f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "r"
+}
