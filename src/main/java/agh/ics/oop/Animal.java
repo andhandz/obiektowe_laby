@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 
 public class Animal implements IMapElement {
-        private final ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
+        private ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
         private MapDirection orientation;
         private Vector2d position;
         private IWorldMap map;
@@ -11,6 +11,7 @@ public class Animal implements IMapElement {
         public Animal(){
             orientation = MapDirection.NORTH;
             position = new Vector2d(2, 2);
+            this.observers = new ArrayList<>();
         }
 
         public MapDirection getOrientation() {

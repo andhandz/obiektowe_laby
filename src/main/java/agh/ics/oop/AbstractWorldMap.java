@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver{
     LinkedHashMap <Vector2d, Animal> animals = new LinkedHashMap<>();
     protected MapVisualiser map= new MapVisualiser(this);
+    protected MapBoundary map_boundary = new MapBoundary(this);
 
     public boolean canMoveTo(Vector2d position) {
         return (!isOccupied(position));
@@ -15,8 +16,10 @@ abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver{
         if(this.canMoveTo(animal.getPosition())){
            animals.put(animal.getPosition(),animal);
            animal.addObserver(this);
+           animal.addObserver(map_boundary);
+           map_boundary.add(animal);
             return true;}
-        return false;
+        throw new IllegalArgumentException("cannot place object at " + animal.getPosition().toString());
     }
 
     public boolean isOccupied(Vector2d position) {

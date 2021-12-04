@@ -3,23 +3,33 @@ package agh.ics.oop;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class AnimalTest {
+    IWorldMap map = new RectangularMap(5,5);
+    Animal animal  = new Animal(map);
     @Test
     public void test(){
         String[] args={"f","f","b","l","l"};
-        MoveDirection[] directions= new OptionsParser().parse(args);
+        String[] args1={"fdsa","f","b","l","l"};
+
+        assertThrows(IllegalArgumentException.class,
+                () -> OptionsParser.parse(args1));
+
+        MoveDirection[] directions= OptionsParser.parse(args);
         MoveDirection[] correct_directions={
                 MoveDirection.FORWARD,
                 MoveDirection.FORWARD,
                 MoveDirection.BACKWARD,
                 MoveDirection.LEFT,
                 MoveDirection.LEFT};
-        Animal animal= new Animal();
+
         //pozycja i orientacja poczatkowa
         assertEquals(MapDirection.NORTH,animal.getOrientation());
         assertEquals(new Vector2d(2,2),animal.getPosition());
+
         //czy dane w tablicy lancuchow sa poprawnie interpretowane
         assertArrayEquals(correct_directions,directions);
+
         //czy przemieszca sie wlasciwie
         animal.move(MoveDirection.FORWARD);
         assertEquals(MapDirection.NORTH,animal.getOrientation());
@@ -33,6 +43,7 @@ public class AnimalTest {
         animal.move(MoveDirection.LEFT);
         assertEquals(MapDirection.NORTH,animal.getOrientation());
         assertEquals(new Vector2d(1,3),animal.getPosition());
+
         //czy nie wychodzi poza mape
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);

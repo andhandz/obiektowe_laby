@@ -1,10 +1,6 @@
 package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GrassFieldTest {
@@ -23,10 +19,10 @@ class GrassFieldTest {
     void place() {
         IWorldMap map = new GrassField(10);
         Animal animal1 = new Animal(map,new Vector2d(3,3));
-        Animal animal2 = new Animal(map, new Vector2d(6,4));
-        map.place(animal1);
-        assertTrue(map.place(animal2));
-        assertFalse(map.place(new Animal(map,new Vector2d(3,3))));
+        Animal animal2 = new Animal(map, new Vector2d(3,3));
+        assertTrue(map.place(animal1));
+        assertThrows(IllegalArgumentException.class,
+                () -> map.place(animal2));
     }
 
     @Test
@@ -46,7 +42,7 @@ class GrassFieldTest {
         map.place(animal2);
         assertEquals(animal1, map.objectAt(new Vector2d(3,3)));
         assertEquals(animal2, map.objectAt(new Vector2d(2,4)));
-        assertEquals(null, map.objectAt(new Vector2d(1,1)));
+        assertNull(map.objectAt(new Vector2d(1, 1)));
     }
 
 }
