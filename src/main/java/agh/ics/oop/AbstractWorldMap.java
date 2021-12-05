@@ -26,7 +26,7 @@ abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver{
         return objectAt(position) != null;
     }
 
-    public Object objectAt(Vector2d position) {
+    public IMapElement objectAt(Vector2d position) {
         return animals.get(position);
     }
 

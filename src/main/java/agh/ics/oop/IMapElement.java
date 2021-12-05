@@ -11,4 +11,9 @@ public interface IMapElement {
      * @return symbol of Animal/Grass on the map
      */
     String toString();
+    /**
+     *
+     * @return true when object on spot can stay with this object
+     */
+    Boolean noCollision();
 }

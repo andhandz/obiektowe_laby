@@ -14,4 +14,9 @@ public class Grass implements IMapElement{
     public String toString(){
         return "*";
     }
+
+    @Override
+    public Boolean noCollision() {
+        return true;
+    }
 }

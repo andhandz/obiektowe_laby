@@ -79,5 +79,9 @@ public class Animal implements IMapElement {
             observer.positionChanged(OldPosition,NewPosition);
         }
     }
+    @Override
+    public Boolean noCollision() {
+        return false;
+    }
 }
 

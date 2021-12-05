@@ -22,13 +22,14 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return super.canMoveTo(position) || objectAt(position) instanceof Grass;
+        return super.canMoveTo(position) || objectAt(position).noCollision();
     }
+
 
     public boolean canPlace(Vector2d position) {
         return position.follows(lowerLeft)
                 && position.precedes(upperRight)
-                && (!isOccupied(position) || objectAt(position) instanceof Animal);
+                && (!isOccupied(position) || objectAt(position).noCollision());
     }
 
     private void openSpots(ArrayList <Vector2d> openSpots){
@@ -60,7 +61,7 @@ public class GrassField extends AbstractWorldMap {
 
 
     @Override
-    public Object objectAt(Vector2d position) {
+    public IMapElement objectAt(Vector2d position) {
         if (super.objectAt(position) != null) {
             return super.objectAt(position);
         }
